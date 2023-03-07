@@ -3,8 +3,9 @@ var router = express.Router();
 const Trip = require("../models/trips")
 const { filteredByDate } = require("../modules/filteredByDate")
 
-// POST /trips/search - Find match trips depending on the departure/arrival city and date
-router.post("/search", (req, res) => {
+// POST /trips/search - Find matching trips
+// body: departure, arrival, date
+router.post("/", (req, res) => {
     const body = req.body
     Trip.find({departure: body.departure, arrival: body.arrival })
         .then(trips => {
@@ -19,12 +20,11 @@ router.post("/search", (req, res) => {
         })
 })
 
-// GET /trips
+// GET /trips - Get all trips
 router.get("/", (req, res) => {
     Trip.find().then(allTrips => {
         res.json({result: true, data: allTrips})
     })
 })
-
 
 module.exports = router

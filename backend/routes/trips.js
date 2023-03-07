@@ -3,7 +3,7 @@ var router = express.Router();
 const Trip = require("../models/trips")
 const { filteredByDate } = require("../modules/filteredByDate")
 
-// POST /trips/search - Find matching trips
+// POST /trips - Find matching trips
 // body: departure, arrival, date
 router.post("/", (req, res) => {
     const body = req.body

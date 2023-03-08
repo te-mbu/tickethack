@@ -7,8 +7,10 @@ body {
 /*CONTAINER */
 .container {
   display: grid;
-  grid-template-rows: repeat(8, 60px);
+  grid-template-rows: repeat(12, 1fr);
   grid-template-columns: repeat(12, 1fr);
+  height: 100vh;
+  width: 100vw;
 }
 /*END CONTAINER */
 
@@ -56,42 +58,37 @@ body {
   /*END TOP NAV*/
 
   /*CONTENT*/
+  
   .content {
     display: flex;
     grid-row-start: 2;
-    grid-row-end: 9;
+    grid-row-end: 13;
     grid-column-start: 1;
     grid-column-end: 13;
     background-image: url(/frontend/images/background.jpg);
-    background-size: cover; 
-    min-height: 100vh;
-    width: 100%;
+    background-size: cover;
     background-position: center center, center center;
-    background-repeat: no-repeat;    
+    background-repeat: no-repeat;
   }
 
-  .content-cart {
+  .content-cart {    
     display: flex;
     grid-row-start: 2;
-    grid-row-end: 9;
+    grid-row-end: 13;
     grid-column-start: 1;
     grid-column-end: 13;
     background-color: beige;
     background-size: cover;
-    min-height: 100vh;
-    width: 100%;
     background-position: center center, center center;
     background-repeat: no-repeat;
     flex-direction: column;
     justify-content: center;
     align-items: stretch;
 }
+
 /* END CONTENT */
 
-
-
-
-
+/* HOME */
 
   .child {
     display: flex;
@@ -129,17 +126,7 @@ body {
     padding: 20px;
   }
 
-  .row-cart {
-    margin-left: 15rem;
-    margin-right: 15rem;
-    padding: 20px;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    align-items: center;
-    border-radius: 10px;
-}
+  
 
   #search-box{
     display: flex;
@@ -158,32 +145,47 @@ body {
     align-items: stretch;
   }
 
-  #date {
+  #departure {
+    border-radius: 5px;
+    background-color: #f4f0f0;
+    border: none;
+    height: 2rem;
+    padding-left: 5px;
+  }
 
+  #line-grey {
+    border-bottom: groove;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  #arrival {
+    border-radius: 5px;
+    background-color: #f4f0f0;
+    border: none;
+    height: 2rem;
+    padding-left: 5px;
+  }
+
+  #date {
+    border-radius: 5px;
+    background-color: #f4f0f0;
+    border: none;
+    height: 2rem;
   }
 
   #btn-block {
     display: block;
     width: 100%;
     border: none;
-    background-color: #04AA6D;
+    background-color: #148f1a;
     padding: 14px 28px;
+    color: white;
     font-size: 16px;
     cursor: pointer;
     text-align: center;
-    margin-top: 6rem;
+    margin-top: 5rem;
     border-radius: 10px;
-  }
-
-  #btn-block:hover {
-  display: block;
-  width: 100%;
-  border: none;
-  background-color: #4ee8af;
-  padding: 14px 28px;
-  font-size: 16px;
-  cursor: pointer;
-  text-align: center;
   }
 
   #image-book {
@@ -199,22 +201,111 @@ body {
     margin-left: 2rem;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     border-radius: 10px;
+    overflow-y: scroll;
   }
 
   .searched-trips {
-    background-color:#c1c1c1;
+    background-color: #f4f0f0;
+    margin-bottom: 0.5rem;
+    border-radius: 3px;
+    padding: 5px;
   }
 
   .s-trip-infos {
-    color:#000000;
+    display: flex;
+    color: #000000;
+    font-size: 13px;
+    align-items: baseline;
+    flex-direction: row;
   }
 
   .book-btn {
-    background-color:#148f1a;
-    color:white;
+    background-color: #148f1a;
+    color: white;
+    border-radius: 5px;
+    margin-left: 5px;
+    font-size: 12px;
+    padding: 8px;
+    border: none;
   }
+/* END HOME */
 
-  
-  /*END CONTAINER*/
+
+/* CART PAGE */
+
+.row-cart {
+  margin-left: 15rem;
+  margin-right: 15rem;
+  padding: 20px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  border-radius: 10px 10px 0px 0px;
+  height: 15rem;
+  overflow-y: scroll;
+}
+
+#booking-choices {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  align-content: stretch;
+  background-color: beige;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 40rem;
+}
+
+.choice {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px
+}
+
+.delete {
+  padding: 10px;
+    background-color: #148f1a;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.row-cart-total {
+  margin-left: 15rem;
+    margin-right: 15rem;
+    padding: 20px;
+    background-color: white;
+    border-radius: 0px 0px 10px 10px;
+    background-color: rgb(44, 23, 161);
+}
+
+#booking-total {
+  display: flex;
+  justify-content: space-between;
+}
+
+#total-price {
+  float: left;
+  color: white;
+  padding-left: 20px;
+}
+
+#btn-purchase {
+  float: right;
+  background-color: rgb(20, 143, 26);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  cursor: pointer;
+}
+
+/* END CART PAGE */

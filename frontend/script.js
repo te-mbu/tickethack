@@ -14,7 +14,6 @@ function addToCart(trips) {
   for (let i = 0; i < bookBtn.length; i++) {
     bookBtn[i].addEventListener("click", () => {
     const bookedTrip = trips.data[i]
-    // Add trip to the cart database
       fetch("http://localhost:3000/carts", {
         method: "POST",
         headers: {
@@ -26,22 +25,54 @@ function addToCart(trips) {
       .then(data => {
         if (data.result) {
             // Delete the trip once booked
-            bookBtn[i].parentNode.remove()
+            bookBtn[i].parentNode.parentNode.remove()
+            // Redirect to cart page
+            window.location = './cart.html'
+            return true
+
         } else {
-            // TODO IN CASE IT'S ALREADY IN CART !
+            console.log("Already in cart")
+            return false
         }
       })
     });
   }
 }
 
+const imageBook = document.querySelector("#image-and-text")
+const noTripFound = document.querySelector("#no-trip-found")
+
+function showImage() {
+    imageBook.style.display = "flex"
+    imageBook.style.flexDirection = "column"
+    noTripFound.style.display = "none"
+
+}
+
+function hideImage() {
+    imageBook.style.display = "none"
+    noTripFound.style.display = "none"
+}
+
+function noTripFoundText(text) {
+    imageBook.style.display = "none"
+    noTripFound.style.display = "flex"
+    noTripFound.style.color = "black"
+    noTripFound.textContent = text
+}
+
+// Show train image on load
+showImage()
+
 // Search
 document.querySelector("#btn-block").addEventListener("click", () => {
   removeOldSearchedTrips();
 
+//   Get users value
   const departure = document.querySelector("#departure").value;
   const arrival = document.querySelector("#arrival").value;
   const date = document.querySelector("#date").value;
+
 
   if (departure && arrival && date) {
     const body = {
@@ -59,16 +90,28 @@ document.querySelector("#btn-block").addEventListener("click", () => {
     })
       .then((res) => res.json())
       .then((trips) => {
-        const bookBox = document.querySelector("#book-box");
-        for (let trip of trips.data) {
-          const date = new Date(trip.date);
-          bookBox.innerHTML += `
-        <div class="searched-trips">
-                <div class="s-trip-infos"><span class="s-trip-departure">${trip.departure}</span> > <span class="s-trip-arrival">${trip.arrival}</span><span class="s-trip-time">${(date.getHours() < 10 ? "0" : "") + date.getHours()}:${(date.getMinutes() < 10 ? "0" : "") + date.getMinutes()}</span> <span class="s-trip-price">${trip.price}</span><input type="button" class="book-btn" value="Book"></div>        
-        </div>
-                `;
+        if (trips.result) {
+            // Hide image when searched trips appear
+            hideImage()
+
+            const bookBox = document.querySelector("#book-box");
+            // Add matching trips tp te html
+            for (let trip of trips.data) {
+              const date = new Date(trip.date);
+              bookBox.innerHTML += `
+            <div class="searched-trips">
+                    <div class="s-trip-infos"><span class="s-trip-departure">${trip.departure}</span>  >  <span class="s-trip-arrival">${trip.arrival}</span>  <span class="s-trip-time">${(date.getHours() < 10 ? "0" : "") + date.getHours()}:${(date.getMinutes() < 10 ? "0" : "") + date.getMinutes()}</span>  <span class="s-trip-price">${trip.price}</span><input type="button" class="book-btn" value="Book"></div>        
+            </div>
+                    `;
+            }
+            // Add to cart
+            addToCart(trips)
+
+        } else {
+            noTripFoundText("No trip found")
         }
-        addToCart(trips);
       });
+  } else {
+    noTripFoundText("No trip found")
   }
 });

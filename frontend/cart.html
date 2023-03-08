@@ -12,14 +12,20 @@
         <div class="topnav">
             <a class="logo" href="index.html">Tickethack</a>
             <a href="bookings.html">Bookings</a>
-            <a href="cart.html">Cart</a>
-        
+            <a href="cart.html">Cart</a>        
         </div>
         <div class="content-cart">
             <div class="row-cart">
-                <p class="text-cart">No tickets in your cart. <br> Why not plan a trip?</p>
+                <!-- <p class="text-cart">No tickets in your cart. <br> Why not plan a trip?</p> -->
+                <p class="text-cart">My cart</p>
+            </div>
+            <div class="row-cart-total">
+                <div id="booking-total">
+                    <p id="total-price"></p>
+                    <input type="button" id="btn-purchase" value="Purchase">
+                </div>
             </div>
         </div>
-    
+    <script src="./carts.js"></script>
 </body>
 </html>

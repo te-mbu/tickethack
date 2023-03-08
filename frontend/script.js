@@ -81,7 +81,6 @@ document.querySelector("#btn-block").addEventListener("click", () => {
       arrival: arrival,
       date: date,
     };
-
     fetch("http://localhost:3000/trips", {
       method: "POST",
       headers: {

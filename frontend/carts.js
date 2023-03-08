@@ -58,11 +58,21 @@ function addToBookings(trips) {
   }
 
 
-window.addEventListener('load', (event) => {
+  
+  window.addEventListener('load', (event) => {
+    const noTicketElement = document.querySelector(".text-no-ticket")
+    const textCartElement = document.querySelector(".text-cart")
+    const rowCartTotalElement = document.querySelector(".row-cart-total")
+    rowCartTotalElement.style.display = "none"
+    textCartElement.style.display = "none"
+  noTicketElement.style.display = "block"
     fetch("http://localhost:3000/carts")
         .then(res => res.json())
         .then(data => {
-            if (data.result) {
+            if (data.data.length > 0) {
+              noTicketElement.style.display = "none"
+              textCartElement.style.display = "block"
+              rowCartTotalElement.style.display = "block"
                 const rowCart = document.querySelector(".row-cart")
                 let totalCart = 0
                 for (let trip of data.data) {
@@ -83,6 +93,10 @@ window.addEventListener('load', (event) => {
 
                 addToBookings(data)
                 deleteCartTrip(data.data)
+            } else {
+              noTicketElement.style.display = "block"
+              textCartElement.style.display = "none"
+              rowCartTotalElement.style.display = "none"
             }
         })
 });

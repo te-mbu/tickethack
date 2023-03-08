@@ -1,3 +1,4 @@
+// Remove old searched trips
 function removeOldSearchedTrips() {
   const searchedTrips = document.querySelectorAll(".searched-trips");
   if (searchedTrips) {
@@ -7,9 +8,35 @@ function removeOldSearchedTrips() {
   }
 }
 
+// Add to cart
+function addToCart(trips) {
+  const bookBtn = document.querySelectorAll(".book-btn");
+  for (let i = 0; i < bookBtn.length; i++) {
+    bookBtn[i].addEventListener("click", () => {
+    const bookedTrip = trips.data[i]
+    // Add trip to the cart database
+      fetch("http://localhost:3000/carts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({departure: bookedTrip.departure, arrival: bookedTrip.arrival, date: bookedTrip.date, price: bookedTrip.price}),
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.result) {
+            // Delete the trip once booked
+            bookBtn[i].parentNode.remove()
+        } else {
+            // TODO IN CASE IT'S ALREADY IN CART !
+        }
+      })
+    });
+  }
+}
+
 // Search
 document.querySelector("#btn-block").addEventListener("click", () => {
-
   removeOldSearchedTrips();
 
   const departure = document.querySelector("#departure").value;
@@ -36,38 +63,12 @@ document.querySelector("#btn-block").addEventListener("click", () => {
         for (let trip of trips.data) {
           const date = new Date(trip.date);
           bookBox.innerHTML += `
-          <div class="searched-trips">
-                        <div class="s-trip-infos">${trip.departure} > ${
-            trip.arrival
-          }<span class="s-trip-time">${date.getHours()}:${
-            (date.getMinutes() < 10 ? "0" : "") + date.getMinutes()
-          }</span> <span class="s-trip-price">${trip.price}</span></div>
-                        <input type="button" class="book-btn" value="Book">
-                    </div>
+        <div class="searched-trips">
+                <div class="s-trip-infos"><span class="s-trip-departure">${trip.departure}</span> > <span class="s-trip-arrival">${trip.arrival}</span><span class="s-trip-time">${(date.getHours() < 10 ? "0" : "") + date.getHours()}:${(date.getMinutes() < 10 ? "0" : "") + date.getMinutes()}</span> <span class="s-trip-price">${trip.price}</span><input type="button" class="book-btn" value="Book"></div>        
+        </div>
                 `;
         }
+        addToCart(trips);
       });
   }
-
-
-  
-  
 });
-
-
-// Add to cart
-const bookBtn = document.querySelectorAll(".book-btn");
-if (bookBtn) {
-  for (let button of bookBtn) {
-    button.addEventListener("click", () => {
-
-      // fetch("/cart", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: {arrival: },
-      // });
-    });
-  }
-}

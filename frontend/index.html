@@ -9,12 +9,13 @@
 </head>
 <body>
     <div class="container">
+
         <div class="topnav">
             <a class="logo" href="index.html">Tickethack</a>
             <a href="bookings.html">Bookings</a>
             <a href="cart.html">Cart</a>
-        
         </div>
+        
         <div class="content">
             <div class="child">
                 <h1 id="title">Explore the world effortlessly by train!</h1>
@@ -22,56 +23,22 @@
            
                 <div class="row">
                     <div id="search-box">
-                        <input type="text" id="departure" name="Departure">
-                        <input type="text" id="arrival" name="Arrival">
+                        <div id="departure-arrival"> 
+                            <input type="text" id="departure" name="Departure">
+                            <input type="text" id="arrival" name="Arrival">
+                        </div><br>
                         <input type="date" id="date">
                         <input type="button" id="btn-block"value="Search">
                     </div>
                     <div id="book-box">
-                        <!-- <img src="/frontend/images/train.png" class="responsive">
+                        <!-- <img id="image-book" src="/frontend/images/train.png">
                         <p id="under-image">it's time to book your future trip</p> -->
                     </div>
                 </div>
-
             </div>
 
         </div>
     </div>
-    <script type="text/javascript" src="script.js"></script>
+    <script src="./script.js"></script>
 </body>
 </html>
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="style.css">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tickethack</title>
-</head>
-<body>
-    <div class="container">
-        <div class="topnav">
-            <a class="logo" href="index.html">Tickethack</a>
-            <a href="bookings.html">Bookings</a>
-            <a href="cart.html">Cart</a>
-        
-        </div>
-        <div class="content">
-            <div class="child">
-                <h1 id="title">Explore the world effortlessly by train!</h1>
-                <p id="underline">Compare, book and enjoy cheap prices for train tickets: your journey starts on Tickethack</p>
-                <div id="search-box">
-                    <input type="text" id="departure" name="Departure">
-                    <input type="text" id="arrival" name="Arrival">
-                    <input type="date" id="date">
-                    <input type="button" id="search-btn"value="Search">
-                </div>
-                <div id="book-box"></div>
-            </div>           
-        </div>
-    </div>
-    <script type="text/javascript" src="script.js"></script>
-</body>
-</html> -->

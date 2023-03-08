@@ -45,4 +45,11 @@ router.get("/", (req, res) => {
     })
 })
 
+// DELETE /bookings
+router.delete("/all", (req, res) => {
+  Booking.deleteMany().then(() => {
+      res.json({result: true})
+  })
+})
+
 module.exports = router;

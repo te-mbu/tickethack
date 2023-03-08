@@ -86,6 +86,21 @@ body {
     align-items: stretch;
 }
 
+.content-bookings {    
+  display: flex;
+  grid-row-start: 2;
+  grid-row-end: 13;
+  grid-column-start: 1;
+  grid-column-end: 13;
+  background-color: beige;
+  background-size: cover;
+  background-position: center center, center center;
+  background-repeat: no-repeat;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+}
+
 /* END CONTENT */
 
 /* HOME */
@@ -130,13 +145,14 @@ body {
 
   #search-box{
     display: flex;
-    width: 13rem;
+    width: 15rem;
     height: 15rem;
     background-color: white;
     padding: 1em;
-    margin-left: 2rem;
-    border-radius: 10px;
+    margin-right: 2rem;
     flex-direction: column;
+    align-items: stretch;
+    border-radius: 10px;
   }
 
   #departure-arrival {
@@ -194,13 +210,13 @@ body {
 
   #book-box{
     display: flex;
-    width: 13rem;
+    width: 15rem;
     height: 15rem;
     background-color: white;
     padding: 1em;
     margin-left: 2rem;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     border-radius: 10px;
     overflow-y: scroll;
   }
@@ -218,6 +234,8 @@ body {
     font-size: 13px;
     align-items: baseline;
     flex-direction: row;
+    justify-content: space-between;
+    font-family: math;
   }
 
   .book-btn {
@@ -248,7 +266,7 @@ body {
   overflow-y: scroll;
 }
 
-#booking-choices {
+.booking-choices {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -267,6 +285,13 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 15px
+}
+
+.choice-travel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px
 }
 
 .delete {
@@ -309,3 +334,63 @@ body {
 }
 
 /* END CART PAGE */
+
+/* BOOKINGS PAGE */
+
+.row-bookings {
+  margin-left: 15rem;
+  margin-right: 15rem;
+  padding: 20px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  border-radius: 10px 10px 0px 0px;
+  height: 15rem;
+  overflow-y: scroll;
+}
+
+.booking-payed {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  align-content: stretch;
+  background-color: beige;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 40rem;
+}
+
+.choice-payed {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px
+}
+
+.row-bookings-text {
+  margin-left: 15rem;
+  margin-right: 15rem;
+  padding: 20px;
+  background-color: white;
+  border-radius: 0px 0px 10px 10px;
+}
+
+#line-bookings {
+  border-bottom: groove;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+#bookings-enjoy {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* END BOOKINGS PAGE */

@@ -45,6 +45,7 @@ const noTripFound = document.querySelector("#no-trip-found")
 function showImage() {
     imageBook.style.display = "flex"
     imageBook.style.flexDirection = "column"
+    imageBook.style.alignItems = "center";
     noTripFound.style.display = "none"
 
 }

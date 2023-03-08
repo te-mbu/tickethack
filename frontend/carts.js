@@ -23,6 +23,41 @@ function deleteCartTrip(trips) {
 
 }
 
+function addToBookings(trips) {
+    const bookingChoices = document.querySelectorAll(".booking-choices");
+    for (let i = 0; i < bookingChoices.length; i++) {
+      document.querySelector("#btn-purchase").addEventListener("click", () => {
+      const purchasedTrip = trips.data[i]
+        fetch("http://localhost:3000/bookings", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({departure: purchasedTrip.departure, arrival: purchasedTrip.arrival, date: purchasedTrip.date, price: purchasedTrip.price}),
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (data.result) {
+            fetch("http://localhost:3000/carts/all", {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                  },
+            })
+              // Redirect to bookings page
+              window.location = './bookings.html'
+              return true
+  
+          } else {
+              console.log("Already in cart")
+              return false
+          }
+        })
+      });
+    }
+  }
+
+
 window.addEventListener('load', (event) => {
     fetch("http://localhost:3000/carts")
         .then(res => res.json())
@@ -33,7 +68,7 @@ window.addEventListener('load', (event) => {
                 for (let trip of data.data) {
                     const date = new Date(trip.date)
                     rowCart.innerHTML += `
-                <div id="booking-choices">
+                <div class="booking-choices">
                     <p class="choice">${trip.departure} > ${trip.arrival}</p>
                     <p class="choice">${(date.getHours() < 10 ? "0" : "") + date.getHours()}:${(date.getMinutes() < 10 ? "0" : "") + date.getMinutes()}</p>
                     <p class="choice">${trip.price}€</p>
@@ -46,6 +81,7 @@ window.addEventListener('load', (event) => {
                 // Update total cart price value
                 document.querySelector("#total-price").textContent = `Total : ${totalCart}`
 
+                addToBookings(data)
                 deleteCartTrip(data.data)
             }
         })

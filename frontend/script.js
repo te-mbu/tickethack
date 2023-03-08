@@ -41,29 +41,39 @@ function addToCart(trips) {
 
 const imageBook = document.querySelector("#image-and-text")
 const noTripFound = document.querySelector("#no-trip-found")
+const searchedTrip = document.querySelector(".searched-trips")
 
 function showImage() {
     imageBook.style.display = "flex"
-    imageBook.style.flexDirection = "column"
-    imageBook.style.alignItems = "center";
     noTripFound.style.display = "none"
+    if (searchedTrip) {
+      searchedTrip.style.display = "none"
+    }
 
 }
 
 function hideImage() {
     imageBook.style.display = "none"
     noTripFound.style.display = "none"
+    if (searchedTrip) {
+      searchedTrip.style.display = "block"
+    }
+    
 }
 
 function noTripFoundText(text) {
     imageBook.style.display = "none"
+    if (searchedTrip) {
+      searchedTrip.style.display = "none"
+    }
     noTripFound.style.display = "flex"
-    noTripFound.style.color = "black"
     noTripFound.textContent = text
 }
 
 // Show train image on load
-showImage()
+window.addEventListener('load', (event) => {
+  showImage()
+})
 
 // Search
 document.querySelector("#btn-block").addEventListener("click", () => {
@@ -100,7 +110,7 @@ document.querySelector("#btn-block").addEventListener("click", () => {
               const date = new Date(trip.date);
               bookBox.innerHTML += `
             <div class="searched-trips">
-                    <div class="s-trip-infos"><span class="s-trip-departure">${trip.departure}</span>  >  <span class="s-trip-arrival">${trip.arrival}</span>  <span class="s-trip-time">${(date.getHours() < 10 ? "0" : "") + date.getHours()}:${(date.getMinutes() < 10 ? "0" : "") + date.getMinutes()}</span>  <span class="s-trip-price">${trip.price}</span><input type="button" class="book-btn" value="Book"></div>        
+                    <div class="s-trip-infos"><span class="s-trip-departure">${trip.departure}</span>  >  <span class="s-trip-arrival">${trip.arrival}</span>  <span class="s-trip-time">${(date.getHours() < 10 ? "0" : "") + date.getHours()}:${(date.getMinutes() < 10 ? "0" : "") + date.getMinutes()}</span>  <span class="s-trip-price">${trip.price}</span>€<input type="button" class="book-btn" value="Book"></div>        
             </div>
                     `;
             }

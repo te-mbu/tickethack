@@ -204,6 +204,11 @@ body {
     border-radius: 10px;
   }
 
+  #image-and-text {
+    flex-direction : column;
+    align-items : center;
+  }
+
   #image-book {
     width: 9rem;
   }
